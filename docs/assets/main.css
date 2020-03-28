@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+body {
+  font-family: Arial;
+  margin: 0 auto; /* Center website */
+  padding: 20px;
+}
+
+div.title {
+  font-weight: bold;
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  height: 100px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  height: 100%;
+  width: auto;
+}
+
+.description {
+  clear:both;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+.reviewerName {
+  
+}
+.reviewerID::before {
+  content: '(';
+}
+
+.reviewerID::after {
+  content: ')';
+}
+
+.reviewTime::before {
+  content: "Reviewed on "
+}
+
+.reviewText {
+
+}
+
+.question::before {
+  content: "Question: ";
+}
+.question {
+  font-weight: bold;
+}
+
+.answer::before {
+  content: "Answer: ";
+  font-weight: bold;
+}
+.answer {
+
+}
