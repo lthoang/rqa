@@ -9,6 +9,12 @@ body {
   padding: 20px;
 }
 
+div.group {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px #777 solid;
+}
+
 div.title {
   font-weight: bold;
 }
@@ -79,9 +85,9 @@ div.gallery img {
 
 .question::before {
   content: "Question: ";
+  font-weight: bold;
 }
 .question {
-  font-weight: bold;
 }
 
 .answer::before {
