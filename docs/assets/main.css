@@ -41,6 +41,23 @@ div.gallery img {
   color: orange;
 }
 
+.avg-rating::before {
+  content: '(';
+}
+
+.avg-rating::after {
+  content: ')';
+}
+
+.overall::before {
+  content: '(';
+}
+
+.overall::after {
+  content: ')';
+}
+
+
 .reviewerName {
   
 }
