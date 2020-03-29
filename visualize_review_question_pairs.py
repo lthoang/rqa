@@ -21,7 +21,7 @@ $body
 )
 
 
-imgTemplate = Template('<!-- <div class="gallery"><img class="lazy" src="placeholder-image.jpg" data-src="$imgUrl" data-srcset="image-to-lazy-load-2x.jpg 2x, image-to-lazy-load-1x.jpg 1x"></div> -->')
+imgTemplate = Template('<div class="gallery"><img class="lazy" data-src="$imgUrl"></div>')
 
 descriptionTemplate = Template(
     """<p>$firstText<span id="dots-$asin-$reviewerID">...</span><span id="more-$asin-$reviewerID" style="display:none">$moreText</p><button onclick="toggleDescription('$asin-$reviewerID')" id="toggleBtn-$asin-$reviewerID">Show more</button>
@@ -67,24 +67,27 @@ elementTemplate = Template(
 
 df = pd.read_csv("data/matched.csv")
 meta = pd.read_json("data/products.metadata", lines=True)
-meta = meta.set_index('asin')
+meta = meta.set_index("asin")
 from tqdm import tqdm
+
 body = []
-for idx, row in tqdm(df.iterrows(), desc='Rendering'):
+for idx, row in tqdm(df.iterrows(), desc="Rendering"):
     product = {}
     try:
-        product = meta.loc[row['asin']]
+        product = meta.loc[row["asin"]]
     except:
         pass
-    description = descriptionTemplate.substitute(
-        asin=row["asin"],
-        reviewerID=row["reviewerID"],
-        firstText=str(product.get("description", ""))[:100],
-        moreText=str(product.get("description", ""))[100:],
-    ) if len(str(product.get("description",""))) > 0 else "No description found for displaying"
-    images = "".join(
-        [imgTemplate.substitute(imgUrl=product.get('imUrl'))]
+    description = (
+        descriptionTemplate.substitute(
+            asin=row["asin"],
+            reviewerID=row["reviewerID"],
+            firstText=str(product.get("description", ""))[:100],
+            moreText=str(product.get("description", ""))[100:],
+        )
+        if len(str(product.get("description", ""))) > 0
+        else "No description found for displaying"
     )
+    images = "".join([imgTemplate.substitute(imgUrl=product.get("imUrl", ""))])
 
     reviewerRatingStars = "".join(
         [ratingStarTemplate.substitute(checked="checked") for _ in range(int(row["overall"]))]
@@ -123,4 +126,3 @@ generated = htmlTemplate.substitute(body="".join(body))
 
 with open("docs/review-question-answer.html", "w") as f:
     f.write(generated)
-
