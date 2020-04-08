@@ -62,6 +62,13 @@ div.gallery img {
   content: ')';
 }
 
+.review {
+  padding: 1rem;
+}
+
+.review > div {
+  padding-bottom: 1rem;
+}
 
 .reviewerName {
   
