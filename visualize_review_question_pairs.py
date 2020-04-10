@@ -53,7 +53,7 @@ reviewTemplate = Template(
 )
 elementTemplate = Template(
   """
-<div class="group">
+<div class="group" id="$asin">
   <div class="product">
     <div class="title">$title</div>
     <div class="asin">$asin</div>
